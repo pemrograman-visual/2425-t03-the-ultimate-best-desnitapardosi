@@ -1,0 +1,210 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: t03&#45;01
+      id: t03-45-01
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t03&#45;01
+        setup-command: make compile
+        command: make -s test
+        input: |
+          979-8700048361
+          The Science of Self-Control
+          Menno Henselmans
+          2021
+          ---
+          no
+          35.98
+          -14.11
+          41
+          5.0
+          978-0439708180
+          Harry Potter and the Sorcerer's Stone
+          J.K. Rowling
+          1998
+          Scholastic
+          no
+          14.15
+          -9.55
+          16
+          4.8
+          ---
+        expected-output: |
+          979-8700048361|The Science of Self-Control|Menno Henselmans|2021|---|no|35.98|-14.11|41|5.0|Best Pick|Never come twice|---
+          978-0439708180|Harry Potter and the Sorcerer's Stone|J.K. Rowling|1998|Scholastic|no|14.15|-9.55|16|4.8|Best Pick|Once in a lifetime|The ultimate best
+        comparison-method: exact
+        timeout: 1
+    - name: t03&#45;02
+      id: t03-45-02
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t03&#45;02
+        setup-command: make compile
+        command: make -s test
+        input: |
+          978-0130895929
+          C: A Reference Manual
+          Samuel Harbison, Guy Steele Jr.
+          2002
+          Pearson
+          no
+          50.19
+          -31.05
+          21
+          4.7
+          978-0593238295
+          AI 2041: Ten Visions for Our Future
+          Kai-Fu Lee, Chen Qiufan
+          2021
+          Currency
+          no
+          25.49
+          -13.01
+          11
+          4.9
+          ---
+        expected-output: |
+          978-0130895929|C: A Reference Manual|Samuel Harbison, Guy Steele Jr.|2002|Pearson|no|50.19|-31.05|21|4.7|Best Pick|Once in a lifetime|The ultimate best
+          978-0593238295|AI 2041: Ten Visions for Our Future|Kai-Fu Lee, Chen Qiufan|2021|Currency|no|25.49|-13.01|11|4.9|Best Pick|Once in a lifetime|The ultimate best
+        comparison-method: exact
+        timeout: 1
+    - name: t03&#45;03
+      id: t03-45-03
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t03&#45;03
+        setup-command: make compile
+        command: make -s test
+        input: |
+          978-0439708180
+          Harry Potter and the Sorcerer's Stone
+          J.K. Rowling
+          1998
+          Scholastic
+          no
+          14.15
+          -9.55
+          16
+          4.8
+          979-8700048361
+          The Science of Self-Control
+          Menno Henselmans
+          2021
+          ---
+          no
+          35.98
+          -14.11
+          41
+          5.0
+          978-0439708180
+          Harry Potter and the Sorcerer's Stone
+          J.K. Rowling
+          1998
+          Scholastic
+          no
+          14.15
+          -9.55
+          16
+          4.8
+          ---
+        expected-output: "978-0439708180|Harry Potter and the Sorcerer's Stone|J.K.
+          Rowling|1998|Scholastic|no|14.15|-9.55|16|4.8|Best Pick|Once in a lifetime|The
+          ultimate best\n979-8700048361|The Science of Self-Control|Menno Henselmans|2021|---|no|35.98|-14.11|41|5.0|Best
+          Pick|Never come twice|---\n978-0439708180|Harry Potter and the Sorcerer's
+          Stone|J.K. Rowling|1998|Scholastic|no|14.15|-9.55|16|4.8|Best Pick|Once
+          in a lifetime|The ultimate best \n"
+        comparison-method: exact
+        timeout: 1
+    - name: t03&#45;04
+      id: t03-45-04
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t03&#45;04
+        setup-command: make compile
+        command: make -s test
+        input: |
+          978-0130895929
+          C: A Reference Manual
+          Samuel Harbison, Guy Steele Jr.
+          2002
+          Pearson
+          no
+          50.19
+          -31.05
+          21
+          4.7
+          978-0593238295
+          AI 2041: Ten Visions for Our Future
+          Kai-Fu Lee, Chen Qiufan
+          2021
+          Currency
+          no
+          25.49
+          -13.01
+          11
+          4.9
+          978-0593238295
+          AI 2041: Ten Visions for Our Future
+          Kai-Fu Lee, Chen Qiufan
+          2021
+          Currency
+          no
+          25.49
+          3.01
+          11
+          3.0
+          ---
+        expected-output: |
+          978-0130895929|C: A Reference Manual|Samuel Harbison, Guy Steele Jr.|2002|Pearson|no|50.19|-31.05|21|4.7|Best Pick|Once in a lifetime|The ultimate best
+          978-0593238295|AI 2041: Ten Visions for Our Future|Kai-Fu Lee, Chen Qiufan|2021|Currency|no|25.49|-13.01|11|4.9|Best Pick|Once in a lifetime|The ultimate best
+          978-0593238295|AI 2041: Ten Visions for Our Future|Kai-Fu Lee, Chen Qiufan|2021|Currency|no|25.49|3.01|11|3.0|Average|---|---
+        comparison-method: exact
+        timeout: 1
+    - name: t03&#45;05
+      id: t03-45-05
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t03&#45;05
+        setup-command: make compile
+        command: make -s test
+        input: |
+          978-0000000000
+          No Fact
+          Wiro Sableng
+          2009
+          ---
+          yes
+          5.55
+          -1.11
+          0
+          2.9
+          ---
+        expected-output: '978-0000000000|No Fact|Wiro Sableng|2009|---|yes|5.55|-1.11|0|2.9|Low|No
+          regret|---
+
+          '
+        comparison-method: exact
+        timeout: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        T03-45-01_RESULTS: "${{steps.t03-45-01.outputs.result}}"
+        T03-45-02_RESULTS: "${{steps.t03-45-02.outputs.result}}"
+        T03-45-03_RESULTS: "${{steps.t03-45-03.outputs.result}}"
+        T03-45-04_RESULTS: "${{steps.t03-45-04.outputs.result}}"
+        T03-45-05_RESULTS: "${{steps.t03-45-05.outputs.result}}"
+      with:
+        runners: t03-45-01,t03-45-02,t03-45-03,t03-45-04,t03-45-05
