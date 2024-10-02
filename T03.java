@@ -1,6 +1,5 @@
 // 12S24043 - desnita pardosi
 // 12S24018 - kelvin yohannes
-
 import java.util.*;
 import java.lang.Math;
 
