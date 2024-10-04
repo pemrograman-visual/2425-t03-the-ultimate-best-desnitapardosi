@@ -1,5 +1,6 @@
-// 12S24043 - desnita pardosi
-// 12S24018 - kelvin yohannes
+// 12S24043 - Desnita Pardosi
+// 12S24018 - Kelvin Yohanes Putra
+
 import java.util.*;
 import java.lang.Math;
 
@@ -16,11 +17,11 @@ public class T03 {
         while (!kodeisbn.equals("---")) {
             judul = input.nextLine();
             penulis = input.nextLine();
-            tahunterbit = input.nextInt();
+            tahunterbit = Integer.parseInt(input.nextLine());
             penerbit = input.nextLine();
             formatbuku = input.nextLine();
-            hargapembelian = input.nextDouble();
-            minimummargin = input.nextDouble();
+            hargapembelian = Double.parseDouble(input.nextLine());
+            minimummargin = Double.parseDouble(input.nextLine());
             if (-(minimummargin / hargapembelian) > 0.4) {
                 jenisdiskon = "Once in a lifetime";
             } else {
@@ -34,8 +35,8 @@ public class T03 {
                     }
                 }
             }
-            stok = input.nextInt();
-            rating = input.nextDouble();
+            stok = Integer.parseInt(input.nextLine());
+            rating = Double.parseDouble(input.nextLine());
             if (rating >= 4.7) {
                 keterangan = "Best Pick";
             } else {
